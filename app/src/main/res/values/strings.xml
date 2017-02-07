@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EngSup</string>
+    <string name="cat">cat</string>
+    <string name="ok">Ок</string>
+    <string name="name">Name</string>
+    <string name="need_password">Введите пароль</string>
+    <string name="remember_me">Remember me</string>
+    <string name="need_login">Введите логин</string>
+    <string name="set_1">Набор №1</string>
+    <string name="next">Next</string>
+    <string name="cat_t">Кошка</string>
+    <string name="Spoon">Ложка</string>
+    <string name="mouse">Мышка</string>
+    <string name="book">Книжка</string>
+</resources>
