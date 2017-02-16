@@ -39,6 +39,10 @@ public class ChoosingTaskActivity extends Activity {
 //            }
 //        });
         for (int i = 0; i < buttons.length; i++){
+            if (i < unit)
+                buttons[i].setEnabled(true);
+            else
+                buttons[i].setEnabled(false);
             buttons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

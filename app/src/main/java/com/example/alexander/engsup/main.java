@@ -104,7 +104,7 @@ public class Main extends Activity {
                 Intent intent;
                 switch (isAdmin){
                     case -1:
-                        Toast.makeText(activity, "неверный логин или пароль", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "Неверный логин или пароль", Toast.LENGTH_LONG).show();
                         break;
                     case 0:
                         intent = new Intent(Main.this, ChoosingTaskActivity.class);
