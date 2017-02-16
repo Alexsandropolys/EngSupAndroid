@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Arrays;
+
 /**
  * Created by Alexander on 26.01.2017.
  */
@@ -15,13 +17,34 @@ public class ChoosingTaskActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choosing_task);
-        Button set1Button = (Button) findViewById(R.id.set1Button);
-        set1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChoosingTaskActivity.this, Task1_Activity.class);
-                startActivity(intent);
-            }
-        });
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", -1);
+        int unit = intent.getIntExtra("unit", -1);
+        Button[] buttons = new Button[]{
+                (Button) findViewById(R.id.set1Button),
+//                (Button) findViewById(R.id.set2Button),
+//                (Button) findViewById(R.id.set3Button),
+//                (Button) findViewById(R.id.set4Button),
+//                (Button) findViewById(R.id.set5Button),
+                // TODO: 16.02.2017 Make new buttons
+        };
+
+//        Button set1Button = (Button) findViewById(R.id.set1Button);
+//        set1Button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ChoosingTaskActivity.this, Task1_Activity.class);
+//                startActivity(intent);
+//            }
+//        });
+        for (int i = 0; i < buttons.length; i++){
+            buttons[i].setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+        }
     }
 }
