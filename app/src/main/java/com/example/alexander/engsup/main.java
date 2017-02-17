@@ -113,7 +113,7 @@ public class Main extends Activity {
                         startActivity(intent);
                         break;
                     case 1:
-                        intent = new Intent(Main.this, ChoosingTaskActivity.class);
+                        intent = new Intent(Main.this, AdminPanelActivity.class);
                         intent.putExtra("id", id);
                         startActivity(intent);
                         break;

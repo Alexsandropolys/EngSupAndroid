@@ -3,16 +3,16 @@ package com.example.alexander.engsup;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-
-import java.util.Arrays;
 
 /**
  * Created by Alexander on 26.01.2017.
  */
 
 public class ChoosingTaskActivity extends Activity {
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,25 +30,13 @@ public class ChoosingTaskActivity extends Activity {
                 // TODO: 16.02.2017 Make new buttons
         };
 
-//        Button set1Button = (Button) findViewById(R.id.set1Button);
-//        set1Button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ChoosingTaskActivity.this, Task1_Activity.class);
-//                startActivity(intent);
-//            }
-//        });
         for (int i = 0; i < buttons.length; i++){
             if (i < unit)
                 buttons[i].setEnabled(true);
             else
                 buttons[i].setEnabled(false);
-            buttons[i].setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
+            buttons[i].setOnClickListener(new ChoosingListener(i + 1, this));
         }
     }
+
 }
