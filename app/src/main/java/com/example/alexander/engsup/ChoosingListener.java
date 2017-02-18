@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -65,10 +66,16 @@ public class ChoosingListener implements View.OnClickListener {
                         "SELECT `startBookId`, `finishBookId` FROM `unit` WHERE \"id\" = ?;"
                 );
                 PreparedStatement statement2 = connection.prepareStatement(
+//                        выборка всех слов топика
                         "SELECT * FROM `words` WHERE \"num\" IN " +
                                 "(SELECT `wordId` FROM `progress` WHERE " +
-                                "(\"userId\" = ? AND \"status\" = 1 AND \"wordId\" >= ? AND \"wordId\" <= ?)) " +
-                                "ORDER BY RAND() LIMIT 1;"
+                                "(\"userId\" = ? AND \"status\" = 1 AND \"wordId\" >= ? AND \"wordId\" <= ?))"
+
+//                        выборка 1 слова
+//                        "SELECT * FROM `words` WHERE \"num\" IN " +
+//                                "(SELECT `wordId` FROM `progress` WHERE " +
+//                                "(\"userId\" = ? AND \"status\" = 1 AND \"wordId\" >= ? AND \"wordId\" <= ?)) " +
+//                                "ORDER BY RAND() LIMIT 1;"
                 );
 
                 statement1.setInt(1, unitId);
@@ -101,12 +108,24 @@ public class ChoosingListener implements View.OnClickListener {
 //                        intent = new Intent(activity, Task4_Activity.class);
                         break;
                 }
-                if (intent != null) {
-                    intent.putExtra("word", new Word(resultSet.getInt("num"), resultSet.getString("lang1"),
+//                для 1 слова
+//                if (intent != null) {
+//                    intent.putExtra("word", new Word(resultSet.getInt("num"), resultSet.getString("lang1"),
+//                            resultSet.getString("def1"), resultSet.getString("lang2"), resultSet.getString("def2"),
+//                            resultSet.getInt("synId"), resultSet.getInt("oppId"), resultSet.getString("pos"),
+//                            resultSet.getString("sent1"), resultSet.getString("sent2")
+//                            ));
+//                }
+                ArrayList<Word> words = new ArrayList<>();
+                while (resultSet.next()){
+                    words.add(new Word(resultSet.getInt("num"), resultSet.getString("lang1"),
                             resultSet.getString("def1"), resultSet.getString("lang2"), resultSet.getString("def2"),
                             resultSet.getInt("synId"), resultSet.getInt("oppId"), resultSet.getString("pos"),
-                            resultSet.getString("sent1"), resultSet.getString("sent2")
-                            ));
+                            resultSet.getString("sent1"), resultSet.getString("sent2")));
+
+                }
+                if (intent != null) {
+                    intent.putExtra("words", words);
                 }
                 // TODO: 17.02.2017 Make 2-4 Tasks
                 connection.close();

@@ -34,6 +34,46 @@ public class Word implements Parcelable {
         this.sent2 = sent2;
     }
 
+    public int getNum() {
+        return num;
+    }
+
+    public String getLang1() {
+        return lang1;
+    }
+
+    public String getDef1() {
+        return def1;
+    }
+
+    public String getLang2() {
+        return lang2;
+    }
+
+    public String getDef2() {
+        return def2;
+    }
+
+    public int getSynId() {
+        return synId;
+    }
+
+    public int getOppId() {
+        return oppId;
+    }
+
+    public String getPos() {
+        return pos;
+    }
+
+    public String getSent1() {
+        return sent1;
+    }
+
+    public String getSent2() {
+        return sent2;
+    }
+
     protected Word(Parcel in) {
         num = in.readInt();
         lang1 = in.readString();
