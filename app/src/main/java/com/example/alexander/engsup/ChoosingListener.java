@@ -19,6 +19,7 @@ import java.util.Random;
 public class ChoosingListener implements View.OnClickListener {
     private  int unitIndex;
     private ChoosingTaskActivity activity;
+    private int userId;
     private Random rnd = new Random();
     private static final String URL = "jdbc:mysql://192.168.0.71:3306/project";
     private static final String LOGIN = "root";
@@ -26,9 +27,10 @@ public class ChoosingListener implements View.OnClickListener {
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String TAG = "Exception";
 
-    public ChoosingListener(int unitIndex, ChoosingTaskActivity activity) {
+    public ChoosingListener(int unitIndex, ChoosingTaskActivity activity, int userId) {
         this.unitIndex = unitIndex;
         this.activity = activity;
+        this.userId = userId;
     }
 
     @Override
@@ -58,17 +60,36 @@ public class ChoosingListener implements View.OnClickListener {
         protected void onPostExecute(Connection connection) {
             super.onPostExecute(connection);
             try {
-                PreparedStatement statement = connection.prepareStatement("SELECT `startBookId`, `finishBookId` FROM `unit` WHERE \"id\" = ?;");
-                statement.setInt(1, unitId);
-                ResultSet resultSet = statement.executeQuery();
+                Intent intent = null;
+                PreparedStatement statement1 = connection.prepareStatement(
+                        "SELECT `startBookId`, `finishBookId` FROM `unit` WHERE \"id\" = ?;"
+                );
+                PreparedStatement statement2 = connection.prepareStatement(
+                        "SELECT * FROM `words` WHERE \"num\" IN " +
+                                "(SELECT `wordId` FROM `progress` WHERE " +
+                                "(\"userId\" = ? AND \"status\" = 1 AND \"wordId\" >= ? AND \"wordId\" <= ?)) " +
+                                "ORDER BY RAND() LIMIT 1;"
+                );
+
+                statement1.setInt(1, unitId);
+                ResultSet resultSet = statement1.executeQuery();
                 int start = resultSet.getInt("startBookId");
                 int finish = resultSet.getInt("finishBookId");
 
-                Intent intent;
+
+                statement2.setInt(1, userId);
+                statement2.setInt(2, start);
+                statement2.setInt(3, finish);
+                resultSet = statement2.executeQuery();
+
+                statement1.close();
+                statement2.close();
+
                 int taskNum = rnd.nextInt(4);
                 switch (taskNum){
                     case 0:
                         intent = new Intent(activity, Task1_Activity.class);
+
                         break;
                     case 1:
 //                        intent = new Intent(activity, Task2_Activity.class);
@@ -79,10 +100,16 @@ public class ChoosingListener implements View.OnClickListener {
                     case 3:
 //                        intent = new Intent(activity, Task4_Activity.class);
                         break;
-
+                }
+                if (intent != null) {
+                    intent.putExtra("word", new Word(resultSet.getInt("num"), resultSet.getString("lang1"),
+                            resultSet.getString("def1"), resultSet.getString("lang2"), resultSet.getString("def2"),
+                            resultSet.getInt("synId"), resultSet.getInt("oppId"), resultSet.getString("pos"),
+                            resultSet.getString("sent1"), resultSet.getString("sent2")
+                            ));
                 }
                 // TODO: 17.02.2017 Make 2-4 Tasks
-
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

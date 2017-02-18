@@ -89,7 +89,9 @@ public class Main extends Activity {
         protected void onPostExecute(Connection connection) {
             super.onPostExecute(connection);
             try {
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT `id`, `isAdmin`, `unit` FROM `users` WHERE (\"login\" = ? AND \"password\" = ?);");
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT `id`, `isAdmin`, `unit` FROM `users` WHERE (\"login\" = ? AND \"password\" = ?);"
+                );
                 preparedStatement.setString(1, ((TextView) findViewById(R.id.login)).getText().toString());
                 preparedStatement.setString(2, ((TextView) findViewById(R.id.password)).getText().toString());
                 ResultSet resultSet = preparedStatement.executeQuery();
@@ -118,6 +120,7 @@ public class Main extends Activity {
                         startActivity(intent);
                         break;
                 }
+                connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

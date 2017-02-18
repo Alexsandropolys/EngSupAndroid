@@ -35,7 +35,7 @@ public class ChoosingTaskActivity extends Activity {
                 buttons[i].setEnabled(true);
             else
                 buttons[i].setEnabled(false);
-            buttons[i].setOnClickListener(new ChoosingListener(i + 1, this));
+            buttons[i].setOnClickListener(new ChoosingListener(i + 1, this, id));
         }
     }
 
