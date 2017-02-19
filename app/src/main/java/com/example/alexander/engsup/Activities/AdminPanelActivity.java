@@ -1,4 +1,4 @@
-package com.example.alexander.engsup;
+package com.example.alexander.engsup.Activities;
 
 import android.app.Activity;
 import android.content.Intent;

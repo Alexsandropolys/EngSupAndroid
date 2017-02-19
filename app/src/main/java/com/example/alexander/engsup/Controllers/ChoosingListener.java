@@ -1,9 +1,14 @@
-package com.example.alexander.engsup;
+package com.example.alexander.engsup.Controllers;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+
+import com.example.alexander.engsup.Activities.ChoosingTaskActivity;
+import com.example.alexander.engsup.Activities.Task1_Activity;
+import com.example.alexander.engsup.Structure.Progress;
+import com.example.alexander.engsup.Structure.Word;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -77,7 +82,11 @@ public class ChoosingListener implements View.OnClickListener {
 //                                "(\"userId\" = ? AND \"status\" = 1 AND \"wordId\" >= ? AND \"wordId\" <= ?)) " +
 //                                "ORDER BY RAND() LIMIT 1;"
                 );
-
+                PreparedStatement statement3 = connection.prepareStatement(
+                        "SELECT * FROM `progress` WHERE(" +
+                                " \"userId\" = ? AND \"status\" = 1 AND" +
+                                " \"wordId\" >= ? AND \"wordId\" <= ?);"
+                );
                 statement1.setInt(1, unitId);
                 ResultSet resultSet = statement1.executeQuery();
                 int start = resultSet.getInt("startBookId");
@@ -89,11 +98,17 @@ public class ChoosingListener implements View.OnClickListener {
                 statement2.setInt(3, finish);
                 resultSet = statement2.executeQuery();
 
+                statement3.setInt(1, userId);
+                statement3.setInt(2, start);
+                statement3.setInt(3, finish);
+
                 statement1.close();
                 statement2.close();
+                statement3.close();
 
                 int taskNum = rnd.nextInt(4);
                 switch (taskNum){
+                    // TODO: 17.02.2017 Make 2-4 Tasks
                     case 0:
                         intent = new Intent(activity, Task1_Activity.class);
 
@@ -124,11 +139,21 @@ public class ChoosingListener implements View.OnClickListener {
                             resultSet.getString("sent1"), resultSet.getString("sent2")));
 
                 }
+
+                resultSet = statement3.executeQuery();
+                ArrayList<Progress> progresses = new ArrayList<>();
+                while (resultSet.next()){
+                    progresses.add(new Progress(resultSet.getInt("userId"), resultSet.getInt("wordId"),
+                            resultSet.getInt("points"), resultSet.getInt("status")));
+                }
+
                 if (intent != null) {
                     intent.putExtra("words", words);
+                    intent.putExtra("progresses", progresses);
                 }
-                // TODO: 17.02.2017 Make 2-4 Tasks
+
                 connection.close();
+                activity.startActivity(intent);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

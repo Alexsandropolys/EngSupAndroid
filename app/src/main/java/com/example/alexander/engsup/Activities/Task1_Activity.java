@@ -1,14 +1,24 @@
-package com.example.alexander.engsup;
+package com.example.alexander.engsup.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.alexander.engsup.Controllers.MyOnClickListener;
+import com.example.alexander.engsup.R;
+import com.example.alexander.engsup.Structure.Progress;
+import com.example.alexander.engsup.Structure.Word;
+
+import java.util.ArrayList;
 
 /**
  * Created by Alexander on 26.01.2017.
  */
 
 public class Task1_Activity extends Activity {
+    private ArrayList<Word> words;
+    private ArrayList<Progress> progresses;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

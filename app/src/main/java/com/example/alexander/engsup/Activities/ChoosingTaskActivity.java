@@ -1,9 +1,12 @@
-package com.example.alexander.engsup;
+package com.example.alexander.engsup.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.alexander.engsup.Controllers.ChoosingListener;
+import com.example.alexander.engsup.R;
 
 /**
  * Created by Alexander on 26.01.2017.

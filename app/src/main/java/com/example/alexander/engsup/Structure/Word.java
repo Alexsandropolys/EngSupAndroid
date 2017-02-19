@@ -1,4 +1,4 @@
-package com.example.alexander.engsup;
+package com.example.alexander.engsup.Structure;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -21,7 +21,8 @@ public class Word implements Parcelable {
     private String sent2;
 
 
-    public Word(int num, String lang1, String def1, String lang2, String def2, int synId, int oppId, String pos, String sent1, String sent2) {
+    public Word(int num, String lang1, String def1, String lang2, String def2,
+                int synId, int oppId, String pos, String sent1, String sent2) {
         this.num = num;
         this.lang1 = lang1;
         this.def1 = def1;
