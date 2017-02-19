@@ -15,6 +15,10 @@ import com.example.alexander.engsup.R;
 public class ChoosingTaskActivity extends Activity {
 
 
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +27,7 @@ public class ChoosingTaskActivity extends Activity {
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("id", -1);
-        int unit = intent.getIntExtra("unit", -1);
+        int unit = intent.getIntExtra("maxUnit", -1);
         Button[] buttons = new Button[]{
                 (Button) findViewById(R.id.set1Button),
 //                (Button) findViewById(R.id.set2Button),
@@ -38,7 +42,7 @@ public class ChoosingTaskActivity extends Activity {
                 buttons[i].setEnabled(true);
             else
                 buttons[i].setEnabled(false);
-            buttons[i].setOnClickListener(new ChoosingListener(i + 1, this, id));
+            buttons[i].setOnClickListener(new ChoosingListener(i + 1, this, id, unit));
         }
     }
 

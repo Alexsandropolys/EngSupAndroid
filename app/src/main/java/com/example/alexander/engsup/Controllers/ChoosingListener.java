@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.alexander.engsup.Activities.ChoosingTaskActivity;
 import com.example.alexander.engsup.Activities.Task1_Activity;
 import com.example.alexander.engsup.Structure.Word;
 
@@ -27,6 +26,7 @@ public class ChoosingListener implements View.OnClickListener {
     private  int unitIndex;
     private Activity activity;
     private int userId;
+    private int maxUnit;
     private Random rnd = new Random();
     private int start;
     private int finish;
@@ -134,16 +134,18 @@ public class ChoosingListener implements View.OnClickListener {
             intent.putExtra("rightWord", rightWord);
             intent.putExtra("userId", userId);
             intent.putExtra("unitIndex", unitIndex);
+            intent.putExtra("maxUnit", maxUnit);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return intent;
     }
 
-    public ChoosingListener(int unitIndex, Activity activity, int userId) {
+    public ChoosingListener(int unitIndex, Activity activity, int userId, int maxUnit) {
         this.unitIndex = unitIndex;
         this.activity = activity;
         this.userId = userId;
+        this.maxUnit = maxUnit;
     }
 
     @Override

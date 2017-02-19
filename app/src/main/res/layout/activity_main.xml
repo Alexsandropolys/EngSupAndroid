@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.alexander.engsup.Activities.Main"
+    tools:context="com.example.alexander.engsup.Activities.MainActivity"
     android:background="@android:color/holo_blue_light">
 
     <TextView

@@ -20,6 +20,40 @@ public class Word implements Parcelable {
     private String sent1;
     private String sent2;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Word word = (Word) o;
+
+        if (num != word.num) return false;
+        if (synId != word.synId) return false;
+        if (oppId != word.oppId) return false;
+        if (lang1 != null ? !lang1.equals(word.lang1) : word.lang1 != null) return false;
+        if (def1 != null ? !def1.equals(word.def1) : word.def1 != null) return false;
+        if (lang2 != null ? !lang2.equals(word.lang2) : word.lang2 != null) return false;
+        if (def2 != null ? !def2.equals(word.def2) : word.def2 != null) return false;
+        if (pos != null ? !pos.equals(word.pos) : word.pos != null) return false;
+        if (sent1 != null ? !sent1.equals(word.sent1) : word.sent1 != null) return false;
+        return sent2 != null ? sent2.equals(word.sent2) : word.sent2 == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = num;
+        result = 31 * result + (lang1 != null ? lang1.hashCode() : 0);
+        result = 31 * result + (def1 != null ? def1.hashCode() : 0);
+        result = 31 * result + (lang2 != null ? lang2.hashCode() : 0);
+        result = 31 * result + (def2 != null ? def2.hashCode() : 0);
+        result = 31 * result + synId;
+        result = 31 * result + oppId;
+        result = 31 * result + (pos != null ? pos.hashCode() : 0);
+        result = 31 * result + (sent1 != null ? sent1.hashCode() : 0);
+        result = 31 * result + (sent2 != null ? sent2.hashCode() : 0);
+        return result;
+    }
 
     public Word(int num, String lang1, String def1, String lang2, String def2,
                 int synId, int oppId, String pos, String sent1, String sent2) {

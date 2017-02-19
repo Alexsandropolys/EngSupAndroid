@@ -22,7 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class Main extends Activity {
+public class MainActivity extends Activity {
     private static final String MY_SETTINGS = "mySettings";
     private String login_value;
     private String password_value;
@@ -111,13 +111,13 @@ public class Main extends Activity {
                         Toast.makeText(activity, "Неверный логин или пароль", Toast.LENGTH_LONG).show();
                         break;
                     case 0:
-                        intent = new Intent(Main.this, ChoosingTaskActivity.class);
+                        intent = new Intent(MainActivity.this, ChoosingTaskActivity.class);
                         intent.putExtra("id", id);
-                        intent.putExtra("unit", unit);
+                        intent.putExtra("maxUnit", unit);
                         startActivity(intent);
                         break;
                     case 1:
-                        intent = new Intent(Main.this, AdminPanelActivity.class);
+                        intent = new Intent(MainActivity.this, AdminPanelActivity.class);
                         intent.putExtra("id", id);
                         startActivity(intent);
                         break;

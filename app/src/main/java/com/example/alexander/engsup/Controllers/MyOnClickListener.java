@@ -14,8 +14,9 @@ import com.example.alexander.engsup.R;
  */
 
 public class MyOnClickListener implements View.OnClickListener {
-    Activity activity;
-    public MyOnClickListener(Activity activity){
+    private Activity activity;
+    private int right;
+    public MyOnClickListener(Activity activity, int right){
         this.activity = activity;
     }
     @Override
