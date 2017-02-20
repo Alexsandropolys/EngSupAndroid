@@ -173,7 +173,7 @@ public class ChoosingListener implements View.OnClickListener {
 
         @Override
         protected void onPostExecute(Connection connection) {
-            super.onPostExecute(connection);
+            super.onPostExecute(connection);// TODO: 20.02.2017 Возможно, нужно убрать
             try {
                 Intent intent = null;
                 PreparedStatement statement1 = connection.prepareStatement(

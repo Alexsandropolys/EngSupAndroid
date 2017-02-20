@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 
         @Override
         protected void onPostExecute(Connection connection) {
-            super.onPostExecute(connection);
+            super.onPostExecute(connection);// TODO: 20.02.2017 Возможно, нужно убрать
             if (connection == null)
                 Toast.makeText(activity, "No connection:(", Toast.LENGTH_LONG).show();
                 else

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.alexander.engsup.Controllers.MyOnClickListener;
 import com.example.alexander.engsup.R;
@@ -37,6 +38,9 @@ public class Task1_Activity extends Activity {
 
         Collections.shuffle(words);
 
+        TextView textView = (TextView) findViewById(R.id.trans_word);
+        textView.setText(rightWord.getLang1());
+
         Button[] option_word = new Button[4];
         option_word[0] = (Button) findViewById(R.id.option_word_1);
         option_word[1] = (Button) findViewById(R.id.option_word_2);
@@ -53,7 +57,7 @@ public class Task1_Activity extends Activity {
 
 
         for (int i = 0; i<option_word.length; i++){
-            option_word[i].setOnClickListener(new MyOnClickListener(this, right));
+            option_word[i].setOnClickListener(new MyOnClickListener(this, right, i, userId, rightWord));
         }
     }
 
