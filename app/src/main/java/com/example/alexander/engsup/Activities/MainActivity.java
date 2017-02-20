@@ -90,6 +90,9 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(Connection connection) {
             super.onPostExecute(connection);
+            if (connection == null)
+                Toast.makeText(activity, "No connection:(", Toast.LENGTH_LONG).show();
+                else
             try {
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "SELECT `id`, `isAdmin`, `unit` FROM `users` WHERE (\"login\" = ? AND \"password\" = ?);"
